@@ -56,7 +56,7 @@ function areaLabel(area) {
     }
     return null;
   }
-  
+
   function interpolateY(data, xValue, y) {
     var i = bisectorX(data, xValue, 0, data.length - 1),
         a = data[i - 1],
@@ -76,7 +76,24 @@ function areaLabel(area) {
   function my(data) {
 
     // The bounding box of the text label as-is.
-    var box = this.getBBox();
+    //var box = this.getBBox();
+    console.log(this);
+    let minX, maxX, minY, maxY;
+    for (let datum of this.__data__) {
+        let x = datum[0];
+        let y = datum[0];
+        if (!minX || x < minX) minX = x;
+        if (!maxX || x > maxX) maxX = x;
+        if (!minY || y < minY) minY = y;
+        if (!maxY || y > maxY) maxY = y;
+    }
+    var box = {
+        x: minX,
+        y: minY,
+        width: maxX - minX,
+        height: maxY - minY,
+    };
+
 
     // Account for padding.
     var paddingFactorX = 1 + paddingLeft + paddingRight;
