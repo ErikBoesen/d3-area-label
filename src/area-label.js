@@ -87,13 +87,29 @@ function areaLabel(area) {
         if (!minY || y < minY) minY = y;
         if (!maxY || y > maxY) maxY = y;
     }
+
+    let width = 100;
+    if (this.__data__.key) {
+        let width = this.__data__.key.length * 6;
+    }
+    var box = {
+        x: minX,
+        y: minY,
+        /*
+        width: maxX - minX,
+        height: maxY - minY,
+        */
+        width,
+        height: 10,
+    };
+    /*
     var box = {
         x: minX,
         y: minY,
         width: maxX - minX,
         height: maxY - minY,
     };
-
+    */
 
     // Account for padding.
     var paddingFactorX = 1 + paddingLeft + paddingRight;
