@@ -1,6 +1,10 @@
 import fits from './fits';
 import { max, extent, bisector, range } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
+import { createCanvas } from 'canvas';
+
+const canvas = createCanvas(200, 200);
+const ctx = canvas.getContext('2d');
 
 // Returns a transform string that will
 // translate and scale the label to the computed position and size.
@@ -77,7 +81,7 @@ function areaLabel(area) {
 
     // The bounding box of the text label as-is.
     //var box = this.getBBox();
-    console.log(this);
+    /*
     let minX, maxX, minY, maxY;
     for (let datum of this.__data__) {
         let x = datum[0];
@@ -95,10 +99,6 @@ function areaLabel(area) {
     var box = {
         x: minX,
         y: minY,
-        /*
-        width: maxX - minX,
-        height: maxY - minY,
-        */
         width,
         height: 10,
     };
@@ -110,6 +110,14 @@ function areaLabel(area) {
         height: maxY - minY,
     };
     */
+    // Measure how big the font would be on a canvas
+    var measurements = ctx.measureText(this.__data__.key);
+    var box = {
+        x: 0,
+        y: 0,
+        width: measurements.width,
+        height: measurements.actualBoundingBoxAscent,
+    };
 
     // Account for padding.
     var paddingFactorX = 1 + paddingLeft + paddingRight;
