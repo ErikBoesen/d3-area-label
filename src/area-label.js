@@ -118,6 +118,7 @@ function areaLabel(area) {
         width: measurements.width,
         height: measurements.actualBoundingBoxAscent,
     };
+    console.log(this.__data__.key + ': ' + JSON.stringify(box));
 
     // Account for padding.
     var paddingFactorX = 1 + paddingLeft + paddingRight;
